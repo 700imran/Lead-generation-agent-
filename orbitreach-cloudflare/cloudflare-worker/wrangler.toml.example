@@ -1,0 +1,48 @@
+name = "orbitreach-agent"
+main = "src/index.js"
+compatibility_date = "2026-09-30"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+AI_MODEL = "@cf/meta/llama-3.1-8b-instruct"
+DEFAULT_TASK_BUDGET_USD = "0.25"
+MAX_OUTPUT_TOKENS = "1200"
+MAX_WORKFLOW_STEPS = "30"
+MAX_RETRIES = "3"
+MAX_FETCH_BYTES = "120000"
+MAX_STEP_MS = "25000"
+
+[ai]
+binding = "AI"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "orbitreach"
+database_id = "REPLACE_ME"
+
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "orbitreach-data"
+
+[[queues.producers]]
+binding = "AGENT_QUEUE"
+queue = "orbitreach-agent-jobs"
+
+[[queues.consumers]]
+queue = "orbitreach-agent-jobs"
+max_batch_size = 10
+max_batch_timeout = 5
+max_retries = 3
+
+[[workflows]]
+name = "orbitreach-agent-workflow"
+binding = "ORBIT_WORKFLOW"
+class_name = "OrbitReachWorkflow"
+
+[triggers]
+crons = ["*/5 * * * *"]
+
+# Secrets: set with `wrangler secret put` — never put values here.
+# ADMIN_TOKEN
+# SESSION_SECRET
+# WEBHOOK_SECRET

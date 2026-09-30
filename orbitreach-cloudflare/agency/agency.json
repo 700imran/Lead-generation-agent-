@@ -1,0 +1,248 @@
+{
+  "name": "OrbitReach AI Agency",
+  "codename": "ORBITREACH",
+  "version": "0.6.1",
+  "main_agent": "agency-main",
+  "mission": "Find businesses, understand their public digital perception and human decision context, create high-converting websites/apps, optimize discoverability and accessibility, connect each delivered site to a dedicated subscription revenue-engine instance, conduct Admin-authorized outreach, sell projects and recurring growth services, collect approved staged payments, and start verified delivery.",
+  "micro_loop_max_tasks": 5,
+  "max_retries_per_action": 3,
+  "approval_required": [
+    "send_outreach",
+    "send_bulk_outreach",
+    "make_call",
+    "discount_over_threshold",
+    "commercial_commitment",
+    "payment_request",
+    "refund",
+    "production_deploy",
+    "credential_change",
+    "code_merge_to_production",
+    "enable_revenue_engine",
+    "change_subscription_terms",
+    "activate_client_revenue_engine",
+    "publish_growth_claims",
+    "change_tracking_or_consent_behavior",
+    "accept_client_budget",
+    "change_scope_after_quote",
+    "confirm_payment_received",
+    "start_paid_delivery",
+    "increase_cloud_compute_budget",
+    "enable_proxy_route"
+  ],
+  "calling": {
+    "default_enabled": false,
+    "admin_must_enable": true,
+    "allowed_only_for_authorized_campaigns": true
+  },
+  "payments": {
+    "staged_payments_supported": true,
+    "delivery_gate": "payment_verified",
+    "agent_may_track_status": true,
+    "agent_may_not_change_payment_terms_without_approval": true,
+    "confirmation_authority": "admin_only",
+    "agent_may_not_confirm_receipt": true,
+    "delivery_start_requires": [
+      "payment_verified_by_admin",
+      "scope_approved",
+      "compute_budget_available"
+    ]
+  },
+  "subagents": [
+    {
+      "id": "research",
+      "role": "public-web lead discovery, business verification, digital-perception analysis, opportunity scoring and CRM capture"
+    },
+    {
+      "id": "psychology-research",
+      "role": "research human behavior, audience motivations, trust, friction, objections and decision context"
+    },
+    {
+      "id": "behavior-strategy",
+      "role": "convert psychology research into ethical behavioral hypotheses, messaging principles and conversion experiments"
+    },
+    {
+      "id": "uiux",
+      "role": "translate research and psychology evidence into information architecture, interaction patterns, components, accessibility and conversion UX decisions"
+    },
+    {
+      "id": "demo",
+      "role": "generate and QA business-specific website/app demos using research, psychology and UI/UX specifications"
+    },
+    {
+      "id": "growth-optimization",
+      "role": "SEO, AEO and GEO optimization using PageSpeed, accessibility, technical, content and discoverability evidence"
+    },
+    {
+      "id": "developer",
+      "role": "implement websites/apps and embed the revenue-engine connector, lead capture, attribution and secure agent integration interfaces"
+    },
+    {
+      "id": "sales",
+      "role": "personalized outreach, follow-up, qualification, objections and sales handoff"
+    },
+    {
+      "id": "delivery",
+      "role": "production implementation, QA, fixes, deployment and technical handoff"
+    },
+    {
+      "id": "operations",
+      "role": "payments, subscriptions, project gates, documentation, status tracking, client handoff and revenue-engine provisioning"
+    },
+    {
+      "id": "negotiation",
+      "role": "client negotiation, value framing, scope/pricing options, budget discovery and approved commercial negotiation strategy"
+    },
+    {
+      "id": "web-intelligence",
+      "role": "compliant public-web discovery and fetching with caching, rate limits, robots/terms checks and optional proxy routing; never bypass access controls"
+    }
+  ],
+  "task_states": [
+    "queued",
+    "ready",
+    "running",
+    "waiting_approval",
+    "blocked",
+    "failed",
+    "retrying",
+    "verified",
+    "completed",
+    "cancelled"
+  ],
+  "tool_policy": {
+    "optional_failure_isolation": true,
+    "required_tool_failure_blocks_only_dependent_action": true,
+    "retry_backoff_seconds": [
+      5,
+      30,
+      180
+    ]
+  },
+  "data_policy": {
+    "use_public_or_authorized_business_data_only": true,
+    "respect_source_terms_and_messaging_policies": true,
+    "no_private_data_scraping": true
+  },
+  "product_model": {
+    "website_service": [
+      "creation_fee",
+      "hosting_fee",
+      "maintenance_fee"
+    ],
+    "revenue_engine_service": [
+      "lead_generation_and_sales_agent_subscription"
+    ],
+    "client_instance_model": true,
+    "each_delivered_website_gets_optional_dedicated_revenue_engine_instance": true,
+    "instance_customizer": "future client-specific agency customizer",
+    "recurring_services_require_client_approval_and_subscription_status": true
+  },
+  "website_revenue_engine_connector": {
+    "enabled_by_design": true,
+    "purpose": "connect a delivered client website to its dedicated lead-generation-and-selling agency instance",
+    "capabilities": [
+      "lead_capture",
+      "source_attribution",
+      "qualification_intake",
+      "crm_sync",
+      "conversion_events",
+      "handoff_to_revenue_engine",
+      "consent_and_contact_preferences"
+    ],
+    "security": [
+      "tenant_isolation",
+      "signed_requests",
+      "rotatable_credentials",
+      "least_privilege",
+      "audit_events",
+      "rate_limits"
+    ],
+    "agent_never_receives_raw_credentials": true
+  },
+  "optimization": {
+    "seo": true,
+    "aeo": true,
+    "geo": true,
+    "inputs": [
+      "google_pagespeed_insights",
+      "accessibility_audit",
+      "core_web_vitals",
+      "technical_site_audit",
+      "content_structure",
+      "schema_and_crawlability",
+      "ui_feature_review"
+    ],
+    "output": "prioritized optimization backlog with evidence, expected impact, effort and verification criteria"
+  },
+  "commercial_strategy": {
+    "budget_discovery": true,
+    "budget_is_constraint_not_permission_to_reduce_quality": true,
+    "tiered_value_preservation": true,
+    "demo_sequence": [
+      "low_commitment_demo_a",
+      "low_commitment_demo_b",
+      "exact_fit_demo"
+    ],
+    "exact_fit_demo_must_respect": [
+      "client_budget",
+      "approved_scope",
+      "business_goal",
+      "brand_requirements",
+      "technical_constraints"
+    ],
+    "no_deceptive_upsell": true,
+    "no_intentional_underperformance_to_force_upgrade": true,
+    "negotiation_requires_approval_for": [
+      "discount_over_threshold",
+      "scope_change",
+      "payment_terms_change",
+      "commercial_commitment"
+    ],
+    "pricing_model": [
+      "website_creation",
+      "hosting",
+      "maintenance",
+      "revenue_engine_subscription"
+    ]
+  },
+  "web_intelligence": {
+    "enabled": true,
+    "public_or_authorized_data_only": true,
+    "respect_robots_and_source_terms": true,
+    "rate_limit_and_backoff": true,
+    "cache_before_refetch": true,
+    "proxy_pool_optional": true,
+    "proxy_purpose": "availability, geographic testing, and traffic distribution within source limits; not access-control or anti-bot evasion",
+    "forbidden": [
+      "captcha_bypass",
+      "login_bypass",
+      "waf_bypass",
+      "fingerprint_evasion",
+      "rate_limit_evasion"
+    ],
+    "blocked_source_behavior": "stop, record reason, retry later or use permitted alternate source"
+  },
+  "compute_budget": {
+    "enforced": true,
+    "per_task_budget": true,
+    "per_client_budget": true,
+    "daily_budget": true,
+    "monthly_budget": true,
+    "model_routing": [
+      "cheap_fast",
+      "standard",
+      "reasoning_only_when_needed"
+    ],
+    "controls": [
+      "max_tokens",
+      "max_retries",
+      "concurrency",
+      "cache",
+      "batching",
+      "schedule_nonurgent_work",
+      "tool_timeout"
+    ],
+    "hard_stop_on_budget_exceeded": true,
+    "admin_override_required": true
+  }
+}

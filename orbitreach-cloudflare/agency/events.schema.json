@@ -1,0 +1,5 @@
+{
+  "event": "agency.event",
+  "required": ["event_id","timestamp","agent_id","type","status","task_id"],
+  "types": ["task.created","task.started","task.progress","task.completed","task.failed","task.retrying","tool.failed","agent.heartbeat","agent.message","approval.requested","approval.resolved","admin.command","memory.updated","version.created"]
+}

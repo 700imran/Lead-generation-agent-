@@ -1,0 +1,8 @@
+{
+  "version":"1.0",
+  "authentication":"server-side signed request",
+  "tenant_fields":["client_id","website_id","instance_id"],
+  "events":["lead.created","lead.updated","lead.consent.updated","conversion.created","qualification.requested","demo.requested"],
+  "required_controls":["rate_limit","replay_protection","consent_tracking","audit_event","tenant_isolation"],
+  "browser_must_not_hold":["revenue_engine_secret","crm_secret","agent_api_key","payment_secret"]
+}

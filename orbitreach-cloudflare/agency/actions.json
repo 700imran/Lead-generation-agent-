@@ -1,0 +1,555 @@
+{
+  "lead_capture": {
+    "steps": [
+      {
+        "id": "discover",
+        "agent": "research",
+        "max_tasks": 5
+      },
+      {
+        "id": "verify",
+        "agent": "research",
+        "max_tasks": 5
+      },
+      {
+        "id": "perception_analysis",
+        "agent": "research",
+        "max_tasks": 5
+      },
+      {
+        "id": "psychology_research",
+        "agent": "psychology-research",
+        "max_tasks": 4
+      },
+      {
+        "id": "behavior_strategy",
+        "agent": "behavior-strategy",
+        "max_tasks": 4
+      },
+      {
+        "id": "score_and_store",
+        "agent": "research",
+        "max_tasks": 5
+      }
+    ]
+  },
+  "experience_strategy": {
+    "steps": [
+      {
+        "id": "audience_behavior_brief",
+        "agent": "psychology-research",
+        "max_tasks": 4
+      },
+      {
+        "id": "behavior_strategy",
+        "agent": "behavior-strategy",
+        "max_tasks": 4
+      },
+      {
+        "id": "ux_requirements",
+        "agent": "uiux",
+        "max_tasks": 4
+      },
+      {
+        "id": "component_decision",
+        "agent": "uiux",
+        "max_tasks": 4
+      },
+      {
+        "id": "accessibility_requirements",
+        "agent": "uiux",
+        "max_tasks": 4
+      }
+    ]
+  },
+  "demo_and_outreach": {
+    "steps": [
+      {
+        "id": "opportunity_brief",
+        "agent": "research",
+        "max_tasks": 3
+      },
+      {
+        "id": "behavior_brief",
+        "agent": "psychology-research",
+        "max_tasks": 3
+      },
+      {
+        "id": "behavior_strategy",
+        "agent": "behavior-strategy",
+        "max_tasks": 3
+      },
+      {
+        "id": "ux_spec",
+        "agent": "uiux",
+        "max_tasks": 3
+      },
+      {
+        "id": "create_demo",
+        "agent": "demo",
+        "max_tasks": 3
+      },
+      {
+        "id": "qa_demo",
+        "agent": "demo",
+        "max_tasks": 3
+      },
+      {
+        "id": "optimize_demo",
+        "agent": "growth-optimization",
+        "max_tasks": 3
+      },
+      {
+        "id": "draft_message",
+        "agent": "sales",
+        "max_tasks": 3
+      },
+      {
+        "id": "send_message",
+        "agent": "sales",
+        "max_tasks": 3,
+        "approval": "policy"
+      },
+      {
+        "id": "followup",
+        "agent": "sales",
+        "max_tasks": 5
+      }
+    ]
+  },
+  "site_optimization": {
+    "steps": [
+      {
+        "id": "pagespeed_audit",
+        "agent": "growth-optimization",
+        "max_tasks": 3
+      },
+      {
+        "id": "accessibility_audit",
+        "agent": "growth-optimization",
+        "max_tasks": 3
+      },
+      {
+        "id": "seo_audit",
+        "agent": "growth-optimization",
+        "max_tasks": 3
+      },
+      {
+        "id": "aeo_audit",
+        "agent": "growth-optimization",
+        "max_tasks": 3
+      },
+      {
+        "id": "geo_audit",
+        "agent": "growth-optimization",
+        "max_tasks": 3
+      },
+      {
+        "id": "prioritize_fixes",
+        "agent": "growth-optimization",
+        "max_tasks": 3
+      },
+      {
+        "id": "implement_fixes",
+        "agent": "developer",
+        "max_tasks": 3
+      },
+      {
+        "id": "verify_optimization",
+        "agent": "growth-optimization",
+        "max_tasks": 3
+      }
+    ]
+  },
+  "website_delivery": {
+    "steps": [
+      {
+        "id": "kickoff",
+        "agent": "operations",
+        "max_tasks": 2
+      },
+      {
+        "id": "psychology_brief",
+        "agent": "psychology-research",
+        "max_tasks": 3
+      },
+      {
+        "id": "behavior_strategy",
+        "agent": "behavior-strategy",
+        "max_tasks": 3
+      },
+      {
+        "id": "ux_architecture",
+        "agent": "uiux",
+        "max_tasks": 3
+      },
+      {
+        "id": "build",
+        "agent": "developer",
+        "max_tasks": 3
+      },
+      {
+        "id": "revenue_engine_connector",
+        "agent": "developer",
+        "max_tasks": 3
+      },
+      {
+        "id": "qa",
+        "agent": "delivery",
+        "max_tasks": 3
+      },
+      {
+        "id": "optimization_audit",
+        "agent": "growth-optimization",
+        "max_tasks": 3
+      },
+      {
+        "id": "fix",
+        "agent": "developer",
+        "max_tasks": 3
+      },
+      {
+        "id": "acceptance",
+        "agent": "delivery",
+        "max_tasks": 2
+      },
+      {
+        "id": "deploy",
+        "agent": "delivery",
+        "max_tasks": 1,
+        "approval": "policy"
+      },
+      {
+        "id": "provision_revenue_engine",
+        "agent": "operations",
+        "max_tasks": 2,
+        "approval": "policy"
+      },
+      {
+        "id": "handoff",
+        "agent": "operations",
+        "max_tasks": 2
+      }
+    ]
+  },
+  "app_delivery": {
+    "steps": [
+      {
+        "id": "kickoff",
+        "agent": "operations",
+        "max_tasks": 2
+      },
+      {
+        "id": "psychology_brief",
+        "agent": "psychology-research",
+        "max_tasks": 3
+      },
+      {
+        "id": "ux_architecture",
+        "agent": "uiux",
+        "max_tasks": 3
+      },
+      {
+        "id": "build",
+        "agent": "developer",
+        "max_tasks": 3
+      },
+      {
+        "id": "qa",
+        "agent": "delivery",
+        "max_tasks": 3
+      },
+      {
+        "id": "optimization_audit",
+        "agent": "growth-optimization",
+        "max_tasks": 3
+      },
+      {
+        "id": "fix",
+        "agent": "developer",
+        "max_tasks": 3
+      },
+      {
+        "id": "acceptance",
+        "agent": "delivery",
+        "max_tasks": 2
+      },
+      {
+        "id": "release",
+        "agent": "delivery",
+        "max_tasks": 1,
+        "approval": "policy"
+      },
+      {
+        "id": "handoff",
+        "agent": "operations",
+        "max_tasks": 2
+      }
+    ]
+  },
+  "revenue_engine_activation": {
+    "steps": [
+      {
+        "id": "client_config",
+        "agent": "operations",
+        "max_tasks": 3
+      },
+      {
+        "id": "connector_check",
+        "agent": "developer",
+        "max_tasks": 3
+      },
+      {
+        "id": "lead_capture_test",
+        "agent": "developer",
+        "max_tasks": 3
+      },
+      {
+        "id": "qualification_test",
+        "agent": "sales",
+        "max_tasks": 3
+      },
+      {
+        "id": "activation_approval",
+        "agent": "operations",
+        "max_tasks": 1,
+        "approval": "policy"
+      },
+      {
+        "id": "activate",
+        "agent": "operations",
+        "max_tasks": 1,
+        "approval": "policy"
+      },
+      {
+        "id": "health_check",
+        "agent": "operations",
+        "max_tasks": 2
+      }
+    ]
+  },
+  "revenue_engine_cycle": {
+    "steps": [
+      {
+        "id": "capture_lead",
+        "agent": "research",
+        "max_tasks": 5
+      },
+      {
+        "id": "enrich_and_score",
+        "agent": "research",
+        "max_tasks": 5
+      },
+      {
+        "id": "behavior_segment",
+        "agent": "psychology-research",
+        "max_tasks": 4
+      },
+      {
+        "id": "behavior_strategy",
+        "agent": "behavior-strategy",
+        "max_tasks": 4
+      },
+      {
+        "id": "qualify",
+        "agent": "sales",
+        "max_tasks": 4
+      },
+      {
+        "id": "draft_outreach",
+        "agent": "sales",
+        "max_tasks": 4
+      },
+      {
+        "id": "send_outreach",
+        "agent": "sales",
+        "max_tasks": 4,
+        "approval": "policy"
+      },
+      {
+        "id": "followup",
+        "agent": "sales",
+        "max_tasks": 5
+      },
+      {
+        "id": "sales_handoff",
+        "agent": "sales",
+        "max_tasks": 3
+      },
+      {
+        "id": "report",
+        "agent": "operations",
+        "max_tasks": 3
+      }
+    ]
+  },
+  "call": {
+    "steps": [
+      {
+        "id": "qualification_check",
+        "agent": "sales",
+        "max_tasks": 2
+      },
+      {
+        "id": "admin_call_authorization",
+        "agent": "sales",
+        "max_tasks": 1,
+        "approval": "policy"
+      },
+      {
+        "id": "call",
+        "agent": "sales",
+        "max_tasks": 1,
+        "approval": "policy"
+      },
+      {
+        "id": "record_outcome",
+        "agent": "sales",
+        "max_tasks": 2
+      }
+    ]
+  },
+  "sale_and_payment": {
+    "steps": [
+      {
+        "id": "scope",
+        "agent": "sales",
+        "max_tasks": 3
+      },
+      {
+        "id": "proposal",
+        "agent": "sales",
+        "max_tasks": 3
+      },
+      {
+        "id": "commercial_approval",
+        "agent": "operations",
+        "max_tasks": 1,
+        "approval": "policy"
+      },
+      {
+        "id": "payment_request",
+        "agent": "operations",
+        "max_tasks": 2,
+        "approval": "policy"
+      },
+      {
+        "id": "payment_verify",
+        "agent": "operations",
+        "max_tasks": 2,
+        "approval": "admin_payment_confirmation"
+      }
+    ]
+  },
+  "web_lead_intelligence": {
+    "steps": [
+      {
+        "id": "discover_public_sources",
+        "agent": "web-intelligence",
+        "max_tasks": 5
+      },
+      {
+        "id": "fetch_with_cache_rate_limit",
+        "agent": "web-intelligence",
+        "max_tasks": 5
+      },
+      {
+        "id": "verify_business",
+        "agent": "research",
+        "max_tasks": 4
+      },
+      {
+        "id": "store_lead",
+        "agent": "research",
+        "max_tasks": 3
+      }
+    ]
+  },
+  "client_negotiation": {
+    "steps": [
+      {
+        "id": "discover_budget",
+        "agent": "negotiation",
+        "max_tasks": 3
+      },
+      {
+        "id": "present_value_options",
+        "agent": "negotiation",
+        "max_tasks": 3
+      },
+      {
+        "id": "show_low_commitment_demo_a",
+        "agent": "demo",
+        "max_tasks": 3
+      },
+      {
+        "id": "show_low_commitment_demo_b",
+        "agent": "demo",
+        "max_tasks": 3
+      },
+      {
+        "id": "build_exact_fit_demo",
+        "agent": "demo",
+        "max_tasks": 3
+      },
+      {
+        "id": "scope_budget_fit",
+        "agent": "negotiation",
+        "max_tasks": 3
+      },
+      {
+        "id": "commercial_approval",
+        "agent": "negotiation",
+        "max_tasks": 2,
+        "approval": "policy"
+      },
+      {
+        "id": "payment_request",
+        "agent": "operations",
+        "max_tasks": 2,
+        "approval": "policy"
+      },
+      {
+        "id": "admin_payment_confirmation",
+        "agent": "operations",
+        "max_tasks": 1,
+        "approval": "policy"
+      },
+      {
+        "id": "start_delivery",
+        "agent": "operations",
+        "max_tasks": 1,
+        "approval": "policy"
+      }
+    ]
+  },
+  "budget_aware_delivery": {
+    "steps": [
+      {
+        "id": "estimate_compute_cost",
+        "agent": "operations",
+        "max_tasks": 2
+      },
+      {
+        "id": "select_model_and_tools",
+        "agent": "operations",
+        "max_tasks": 2
+      },
+      {
+        "id": "build",
+        "agent": "developer",
+        "max_tasks": 5
+      },
+      {
+        "id": "qa",
+        "agent": "delivery",
+        "max_tasks": 4
+      },
+      {
+        "id": "optimize_cost",
+        "agent": "operations",
+        "max_tasks": 3
+      }
+    ]
+  }
+}

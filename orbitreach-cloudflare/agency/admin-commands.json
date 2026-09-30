@@ -1,0 +1,111 @@
+{
+  "pause_agent": {
+    "required": [
+      "agent_id"
+    ]
+  },
+  "resume_agent": {
+    "required": [
+      "agent_id"
+    ]
+  },
+  "cancel_task": {
+    "required": [
+      "task_id"
+    ]
+  },
+  "retry_task": {
+    "required": [
+      "task_id"
+    ]
+  },
+  "reassign_task": {
+    "required": [
+      "task_id",
+      "agent_id"
+    ]
+  },
+  "run_action": {
+    "required": [
+      "action",
+      "input"
+    ]
+  },
+  "inject_instruction": {
+    "required": [
+      "agent_id",
+      "instruction"
+    ]
+  },
+  "approve": {
+    "required": [
+      "approval_id"
+    ]
+  },
+  "reject": {
+    "required": [
+      "approval_id"
+    ]
+  },
+  "change_priority": {
+    "required": [
+      "task_id",
+      "priority"
+    ]
+  },
+  "enable_calling": {
+    "required": [
+      "campaign_id",
+      "expires_at"
+    ]
+  },
+  "disable_calling": {
+    "required": [
+      "campaign_id"
+    ]
+  },
+  "hold_outreach": {
+    "required": [
+      "campaign_id"
+    ]
+  },
+  "resume_outreach": {
+    "required": [
+      "campaign_id"
+    ]
+  },
+  "enable_revenue_engine": {
+    "required": [
+      "client_id",
+      "subscription_id",
+      "expires_at"
+    ]
+  },
+  "disable_revenue_engine": {
+    "required": [
+      "client_id",
+      "reason"
+    ]
+  },
+  "activate_client_instance": {
+    "required": [
+      "client_id",
+      "approval_id"
+    ]
+  },
+  "hold_revenue_engine": {
+    "required": [
+      "client_id"
+    ]
+  },
+  "resume_revenue_engine": {
+    "required": [
+      "client_id"
+    ]
+  },
+  "run_client_cycle": {
+    "required": [
+      "client_id"
+    ]
+  }
+}
