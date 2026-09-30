@@ -1,7 +1,0 @@
-# key value   (applied with: hermes -p <profile> config set <key> <value> --force)
-# ---- self-improvement loop (ACTIVE) ----
-memory.memory_enabled true
-memory.user_profile_enabled true
-memory.nudge_interval 5
-skills.creation_nudge_interval 8
-auxiliary.background_review.enabled true
