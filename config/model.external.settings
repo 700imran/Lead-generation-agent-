@@ -1,0 +1,5 @@
+# External LLM API. Pick provider/model with `hermes -p <profile> model` (interactive), or edit here.
+# Keys go in the profile's .env (OPENROUTER_API_KEY / DEEPSEEK_API_KEY / XAI_API_KEY / OPENAI_API_KEY ...)
+model.provider openrouter
+model.base_url https://openrouter.ai/api/v1
+model.default deepseek/deepseek-chat

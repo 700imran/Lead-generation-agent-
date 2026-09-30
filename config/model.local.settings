@@ -1,0 +1,7 @@
+# Local open-source model through any OpenAI-compatible server (Ollama shown).
+#   ollama pull deepseek-r1:1.5b
+# Note: a 1.5B model is weak at tool-calling; use it for drafts/tests, keep an external model
+# for prospecting + closing quality.
+model.provider custom
+model.base_url http://localhost:11434/v1
+model.default deepseek-r1:1.5b
