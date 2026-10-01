@@ -1,33 +1,16 @@
-# Production deployment checklist
+# Deployment checklist (Cloudflare)
 
-## Hermes runtime
-- [ ] Hermes installed on PC/VPS/cloud VM
-- [ ] `agency-main` and specialist profiles created
-- [ ] Provider/model credentials stored in Hermes `.env`, not source
-- [ ] API server enabled with strong `API_SERVER_KEY`
-- [ ] HTTPS/private network path from Cloudflare Worker to Hermes
-- [ ] Profile routing verified for `/p/agency-main/v1/...`
-- [ ] Hermes tools/MCP permissions reviewed per profile
-- [ ] Backups for Hermes profile state and D1 enabled
+Run from `cloudflare-worker/`. Needs `wrangler login` (or `CLOUDFLARE_API_TOKEN` with Workers, D1, R2, Queues edit) and Workers AI enabled on the account.
 
-## Cloudflare
-- [ ] D1 database created
-- [ ] D1 migration applied
-- [ ] `HERMES_API_KEY` stored as Worker secret
-- [ ] `ADMIN_TOKEN` stored as Worker secret
-- [ ] `HERMES_BASE_URL` and `HERMES_PROFILE` configured
-- [ ] Cloudflare Access enabled for dashboard
-- [ ] Worker deployed
-- [ ] `/health` passes
-- [ ] `/api/state` requires admin auth in production
-- [ ] Cron tick observed in D1 events
-
-## Agency
-- [ ] Lead sources are permitted and lawful
-- [ ] Outreach identity and opt-out handling configured
-- [ ] Bulk outreach approval gate tested
-- [ ] Pricing/discount approval gate tested
-- [ ] Production deploy approval gate tested
-- [ ] Tool outage isolation tested
-- [ ] Retry and escalation tested
-- [ ] Admin pause/reassign/cancel tested
+- [ ] `npm install && npm test` — all checks pass
+- [ ] `cp wrangler.toml.example wrangler.toml`
+- [ ] `npx wrangler d1 create orbitreach` → paste `database_id` into `wrangler.toml`
+- [ ] `npx wrangler r2 bucket create orbitreach-data`
+- [ ] `npx wrangler queues create orbitreach-agent-jobs`
+- [ ] `npx wrangler d1 execute orbitreach --remote --file=./schema.sql` (fresh DB) — or apply `migrations/0001…0004` in order
+- [ ] `openssl rand -hex 32 | npx wrangler secret put ADMIN_TOKEN`; same for `SESSION_SECRET` and `WEBHOOK_SECRET` (all different)
+- [ ] `npx wrangler deploy`
+- [ ] `curl https://<worker>/health` → ok; `curl -H "Authorization: Bearer $ADMIN" https://<worker>/ready` → all bindings/secrets true
+- [ ] Open `https://<worker>/` (admin dashboard), sign in, create a tenant, save its token
+- [ ] Add a WAF rate-limit rule for `/api/login`
+- [ ] Test kill switch and one approval round-trip on production

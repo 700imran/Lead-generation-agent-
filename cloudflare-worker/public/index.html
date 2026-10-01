@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OrbitReach Admin</title>
+<style>
+:root{color-scheme:light dark;--b:#d0d7de;--a:#2563eb}
+body{font:14px system-ui,sans-serif;margin:0;padding:16px;max-width:1100px;margin-inline:auto}
+h1{font-size:18px}h2{font-size:15px;margin:20px 0 6px}
+input,select,textarea,button{font:inherit;padding:6px 8px;border:1px solid var(--b);border-radius:6px;background:transparent;color:inherit}
+button{cursor:pointer;background:var(--a);color:#fff;border-color:var(--a)}button.s{background:transparent;color:inherit;border-color:var(--b)}
+table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid var(--b);padding:4px 6px;text-align:left;vertical-align:top;font-size:13px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:6px 0}.scroll{overflow-x:auto}
+.tag{padding:1px 6px;border-radius:10px;border:1px solid var(--b);font-size:12px}.bad{color:#dc2626}.ok{color:#16a34a}
+pre{white-space:pre-wrap;word-break:break-word;margin:0}
+</style></head><body>
+<h1>OrbitReach Admin <span id="role" class="tag"></span></h1>
+<div id="login" class="row"><input id="tok" type="password" placeholder="ADMIN_TOKEN" autocomplete="off"><button id="go">Sign in</button><span id="lerr" class="bad"></span></div>
+<div id="app" hidden>
+ <div class="row"><button id="ks"></button><span id="kst"></span><button class="s" id="out">Sign out</button><button class="s" id="ref">Refresh</button></div>
+ <h2>Pending approvals</h2><div class="scroll"><table id="ap"></table></div>
+ <h2>New tenant</h2><div class="row"><input id="tid" placeholder="tenant-id (a-z0-9_-)"><input id="tname" placeholder="name"><button id="mk">Create</button></div><pre id="tout"></pre>
+ <h2>Run action</h2><div class="row"><input id="ttid" placeholder="tenant-id"><select id="act"></select></div>
+ <div class="row"><textarea id="inp" rows="3" cols="60" placeholder='input JSON, e.g. {"url":"https://example.com"}'>{}</textarea><button id="run">Start</button></div><pre id="rout"></pre>
+ <h2>Tasks</h2><div class="scroll"><table id="tk"></table></div>
+ <h2>Audit</h2><div class="scroll"><table id="au"></table></div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+const ACTIONS=['lead_capture','experience_strategy','demo_and_outreach','site_optimization','website_delivery','app_delivery','negotiation_and_pricing','web_lead_research','revenue_engine_activation','revenue_engine_cycle','call','sale_and_payment'];
+$('act').append(...ACTIONS.map(a=>new Option(a,a)));
+async function api(p,body){const r=await fetch(p,{method:body?'POST':'GET',headers:body?{'content-type':'application/json'}:{},body:body?JSON.stringify(body):undefined,credentials:'same-origin'});let j={};try{j=await r.json()}catch{}if(!r.ok)throw new Error(j.error||r.status);return j}
+function fill(t,cols,rows,extra){t.replaceChildren();const h=t.insertRow();cols.forEach(c=>{const th=document.createElement('th');th.textContent=c;h.append(th)});if(extra)h.append(document.createElement('th'));rows.forEach(r=>{const tr=t.insertRow();cols.forEach(c=>{tr.insertCell().textContent=r[c]??''});if(extra)extra(tr.insertCell(),r)})}
+async function load(){try{const s=await api('/api/state');$('login').hidden=true;$('app').hidden=false;$('role').textContent=s.role;
+ $('kst').textContent=s.kill_switch_enabled?'agents running':'KILL SWITCH ACTIVE';$('kst').className=s.kill_switch_enabled?'ok':'bad';$('ks').textContent=s.kill_switch_enabled?'Stop all agents':'Resume agents';$('ks').dataset.enabled=s.kill_switch_enabled;
+ fill($('ap'),['id','tenant_id','step','reason','expires_at'],s.approvals,(td,r)=>{for(const [l,v] of [['Approve',true],['Reject',false]]){const b=document.createElement('button');b.textContent=l;if(!v)b.className='s';b.onclick=async()=>{await api('/api/approval',{approval_id:r.id,approve:v});load()};td.append(b,' ')}});
+ fill($('tk'),['id','tenant_id','action','step','status','updated_at','error'],s.tasks);
+ fill($('au'),['ts','actor_role','tenant_id','type','payload'],s.audit)}catch(e){$('app').hidden=true;$('login').hidden=false}}
+$('go').onclick=async()=>{try{await api('/api/login',{token:$('tok').value});$('tok').value='';$('lerr').textContent='';load()}catch(e){$('lerr').textContent=e.message}};
+$('out').onclick=async()=>{await api('/api/logout',{});load()};$('ref').onclick=load;
+$('ks').onclick=async()=>{await api('/api/kill-switch',{enabled:$('ks').dataset.enabled!=='true'});load()};
+$('mk').onclick=async()=>{try{const j=await api('/api/tenant',{tenant_id:$('tid').value||undefined,name:$('tname').value||undefined});$('tout').textContent=JSON.stringify(j,null,2)}catch(e){$('tout').textContent=e.message}load()};
+$('run').onclick=async()=>{try{const j=await api('/api/task',{tenant_id:$('ttid').value,action:$('act').value,input:JSON.parse($('inp').value||'{}')});$('rout').textContent=JSON.stringify(j)}catch(e){$('rout').textContent=e.message}load()};
+load();setInterval(()=>{if(!$('app').hidden)load()},15000);
+</script></body></html>

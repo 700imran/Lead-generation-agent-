@@ -1,5 +1,3 @@
-# Agency control plane
+# Agency manifest (design reference)
 
-Hermes remains the main execution runtime. This layer defines the agency organization, bounded action loops, subagent roles, state/event contracts and Admin controls.
-
-The Cloudflare Worker is the control/dashboard plane; it does not execute the Hermes Python runtime.
+`agency.json`, `actions.json`, `admin-commands.json` and `events.schema.json` describe the intended agent organisation. The executable workflow table lives in `cloudflare-worker/src/index.js` (`ACTIONS`, `AGENTS`). Earlier versions referred to a Hermes runtime; v0.7.x does not use it.

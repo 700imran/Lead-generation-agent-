@@ -1,0 +1,17 @@
+{
+  "name": "orbitreach-cloudflare",
+  "version": "0.7.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node --check src/index.js",
+    "test": "node test/e2e.mjs",
+    "dry-run": "wrangler deploy --dry-run --outdir .dist",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "miniflare": "^4.0.0",
+    "wrangler": "^4.0.0"
+  }
+}

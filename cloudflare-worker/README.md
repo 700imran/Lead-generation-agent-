@@ -13,7 +13,7 @@ A Worker isolate may disappear at any time. No agent state depends on process me
 1. Create D1 database and apply `schema.sql` (or migration `0003_cloudflare_native.sql` on an existing database).
 2. Create R2 bucket `orbitreach-data`.
 3. Create Queue `orbitreach-agent-jobs`.
-4. Enable Workers AI and bind `AI`.
+4. Enable Workers AI (bound as `AI`).
 5. Copy `wrangler.toml.example` to `wrangler.toml` and replace `database_id`.
 6. Set secrets:
 
@@ -47,22 +47,33 @@ Approval-required steps create a durable approval record. The workflow returns t
 
 The LLM is not a security authority. Deterministic code enforces authentication, authorization, tenant isolation, approvals, budgets, retries, URL safety, and stop conditions. External content is treated as data and never as instructions.
 
+## API
+
+| Route | Auth | Purpose |
+|---|---|---|
+| `GET /health`, `GET /ready` | none / any | liveness; bindings + secrets present |
+| `POST /api/login`, `/api/logout` | admin token | HttpOnly 8h session cookie |
+| `POST /api/tenant`, `/api/tenant/status` | admin | create tenant (returns token once), suspend/activate |
+| `POST /api/task` | tenant/admin | start a workflow `{action,input,priority}` |
+| `POST /api/enqueue` | tenant/admin | same via Queue (async ingress) |
+| `GET /api/task?id=` | tenant/admin | task, steps, results |
+| `GET /api/approvals`, `POST /api/approval` | read: any, decide: admin | `{approval_id, approve:true|false}` |
+| `POST /api/kill-switch` | admin | `{enabled:false}` stops all agents |
+| `GET /api/state` | tenant/admin | tasks, agents, audit, approvals |
+| `POST /api/webhook` | tenant bearer + `X-Orbit-Signature` | HMAC-SHA256 of raw body with `WEBHOOK_SECRET`, hex or base64url; disabled if secret unset |
+
+`GET /` serves the admin dashboard from `public/`. A cron (`*/5`) expires stale approvals and fails stuck tasks.
+
 ## Deploy
 
-```bash
-npx wrangler d1 create orbitreach
-npx wrangler r2 bucket create orbitreach-data
-npx wrangler queues create orbitreach-agent-jobs
-npx wrangler d1 execute orbitreach --remote --file=./schema.sql
-npx wrangler deploy
-```
-
-For an existing D1 database, apply the migration instead of recreating the schema.
+See `../docs/DEPLOYMENT-CHECKLIST.md`.
 
 ## Test
 
 ```bash
-npx wrangler dev --local
+npm install
+npm test        # e2e in workerd: D1, R2, Queues, Workflows real; Workers AI + outbound HTTP mocked
+npm run dry-run # wrangler bundle + binding validation (needs wrangler.toml)
 ```
 
-Then verify `/health`, authentication, tenant-scoped task creation, approval wait/resume, kill switch, signed webhook rejection, and retry behavior.
+See `../docs/STATUS.md` for what is and is not verified, and known limitations (notably: agent steps draft/recommend only; no email/call/payment connectors).

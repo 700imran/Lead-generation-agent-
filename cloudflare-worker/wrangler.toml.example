@@ -1,7 +1,15 @@
 name = "orbitreach-agent"
 main = "src/index.js"
-compatibility_date = "2026-09-30"
+compatibility_date = "2026-07-01"
 compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = ["/api/*", "/health", "/ready"]
+
+[observability]
+enabled = true
 
 [vars]
 AI_MODEL = "@cf/meta/llama-3.1-8b-instruct"
@@ -11,6 +19,8 @@ MAX_WORKFLOW_STEPS = "30"
 MAX_RETRIES = "3"
 MAX_FETCH_BYTES = "120000"
 MAX_STEP_MS = "25000"
+MAX_TASK_BUDGET_USD = "1"
+EST_COST_PER_1K_TOKENS_USD = "0.002"
 
 [ai]
 binding = "AI"
