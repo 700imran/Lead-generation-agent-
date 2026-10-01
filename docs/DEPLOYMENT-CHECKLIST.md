@@ -1,6 +1,6 @@
 # Deployment checklist (Cloudflare)
 
-Run from `cloudflare-worker/`. Needs `wrangler login` (or `CLOUDFLARE_API_TOKEN` with Workers, D1, R2, Queues edit) and Workers AI enabled on the account.
+Fastest: `cd cloudflare-worker && ./deploy.sh` (D1 + R2 are already provisioned). Manual steps below. Run from `cloudflare-worker/`. Needs `wrangler login` (or `CLOUDFLARE_API_TOKEN` with Workers, D1, R2, Queues edit) and Workers AI enabled on the account.
 
 - [ ] `npm install && npm test` — all checks pass
 - [ ] `cp wrangler.toml.example wrangler.toml`
